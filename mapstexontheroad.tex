@@ -1,0 +1,260 @@
+\documentclass[nosubsub]{maps}
+%\documentclass[nosubsub]{maps} % if you need at most two levels of sectioning
+%\documentclass[onecolumn]{maps} % for symmetric single-column layout
+%\documentclass[asym]{maps} % for asymmetric single-column layout
+
+% load packages. Please check whether you really need them.
+\usepackage{url}
+
+\renewcommand{\notesname}{Footnotes}
+
+% title- and author commands can be placed before or after
+% \begin{document}.
+
+\setcounter{page}{2}
+
+\begin{document}
+
+\title{\TeX{} on the Road}
+
+\subtitle{An adventure with \TeX{} while traveling light}
+
+\author{%
+  Piet van Oostrum\\
+  \texttt{piet@vanoostrum.org}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This article describes the adventures that I had while working on a small \TeX{} project without my beloved laptop at hand. With only an iPad to do the work and without a local \TeX{} system installed on it, there were several challenges. I document them here so that others can enjoy the struggles I had and can benefit from the solutions when they encounter similar situations.
+\end{abstract}
+
+\begin{keywords}\TeX, traveling, iPad, overleaf, git
+\end{keywords}
+
+\section{The context}
+
+In July, 2018, my wife Cary and I were traveling in South America, to visit friends in Brazil and Bolivia, and additionally to have some vacation. We wanted to travel light, so I had decided not to take my MacBook Pro with me, saving a little bit more than 2 kgs. of weight. We both had our iPhones and iPads (mine is an iPad mini), and we hoped that would do.
+
+I did not expect to do any \TeX{} work, maybe some light programming, for which I had a Python system (Pythonista)\footnote{\url{http://omz-software.com/pythonista/}} on my iPad.
+
+While we were traveling in Brazil, on our way to Bolivia, I got an email from a user of the \texttt{multirow} package about a possible bug. It came with a solution which was a very simple sibstitution, and back home on the laptop, it would have been a few minutes to make the change, check it in into the version control system, do some test, generate a new version of the documentation, and upload the new version to CTAN.
+
+What would have taken at most 10 minutes at home, however, became a major effort without having a computer with a \TeX{} system. In the end it took me more than two days of struggling, with the victory in the end.
+
+
+Footnotes\footnote{This is an example of a footnote.}  are converted
+to endnotes\footnote{This is another one, with more text to it, to
+see how it will wrap to the next line.}. You will need a
+\verb+\theendnotes+ command to get them actually typeset. The title
+of the notes section is defined by the command \verb+\notesname+.
+
+\section{Sectioning}
+
+The maps style defaults to unnumbered sections. If you really must,
+you can restore section numbering with \emph{e.g.}
+\begin{verbatim}
+\setcounter{secnumdepth}{1}
+\end{verbatim}
+or higher numbers for more levels of numbering.
+
+\subsection{Subsection}
+This is a second-level section header. You can go down one more
+level:
+
+\subsubsection{A subsubsection}
+
+This is a run-in header. The dot at the end of the section title is
+added by the classfile.
+
+\subsubsection{Tip}
+If you only need one or two levels of header, then you can get a
+better layout with the \texttt{nosubsub} document option.
+The Maps editors may decide to turn on this option for you.
+
+\section{Lists}
+
+Another frequently-displayed structure is a list.
+The following is an example of an \emph{itemized}
+list.
+\begin{itemize}
+  \item This is the first item of an itemized list.
+    Each item in the list is marked with a ``tick''.
+  \item This is the second item of the list.  It
+    contains another list nested inside it.  The inner
+    list is an \emph{enumerated} list.
+    \begin{enumerate}
+      \item This is the first item of an enumerated
+        list that is nested within the itemized list.
+
+      \item This is the second item of the inner list.
+        \LaTeX\ allows you to nest lists deeper than
+          you really should.
+    \end{enumerate}
+    This is the rest of the second item of the outer
+    list.  It is no more interesting than any other
+    part of the item.
+  \item This is the third item of the list.
+\end{itemize}
+In a two-column layout, protracted indenting doesn't look very
+good. Therefore, the Maps classfile provides \texttt{itemouter}- and
+\texttt{enumouter} environments:
+\begin{itemouter}
+\item This is the first item of a non-indented itemized list,
+  produced with the \texttt{itemouter} environment.
+\item This is the second item.
+\end{itemouter}
+Now an enumerated version:
+\begin{enumouter}
+\item This is the first item of a non-indented enumerated list,
+  produced with the \texttt{enumouter} environment.
+\item This is the second item.
+\end{enumouter}
+And a version for descriptions:
+\begin{descript}
+\item[cow] A milk-producing animal that grazes grass and has
+multiple stomachs
+\item[kangoroo] An Australian hopping animal
+\end{descript}
+
+\section{Tabulars}
+
+The Maps classfile adds some vertical space around horizontal rules
+in tables. This makes vertical rules look funny, but most of the
+time you are better off without vertical rules anyway; see table
+\ref{tabulars}. If you really insist on vertical rules, use the
+\texttt{deftables} document option.
+
+\begin{table}[ht]
+
+\begin{tabular}{|l|l|}
+\hline
+var & value\\
+\hline
+$Q_{s,\max}$ & 0.18\\
+$K_{s}$      & 1.0\\
+$Y_{x/s}$    & 0.5\\
+$Y_{p/s}$    & 0.854\\
+$Q_{p,\max}$ & 0.0045\\
+$\mu_{\rm crit}$  & 0.01\\
+$k_{h}$       & 0.002\\
+$m_{s}$       & 0.025\\
+\hline
+\end{tabular}\hspace{2pc}
+\begin{tabular}{@{}ll@{}}
+\hline
+var & value\\
+\hline
+$Q_{s,\max}$   & 0.18\\
+$K_{s}$        & 1.0\\
+$Y_{x/s}$      & 0.5\\
+$Y_{p/s}$      & 0.854\\
+$Q_{p,\max}$   & 0.0045\\
+$\mu_{\rm crit}$ & 0.01\\
+$k_{h}$        & 0.002\\
+$m_{s}$        & 0.025\\
+\hline
+\end{tabular}
+\caption{Tabulars with and without vertical rules}\label{tabulars}
+\end{table}
+
+\section{Wide typesetting in single-column layout}
+
+For both single-column layouts, there are environments \texttt{fullwidth} and
+\texttt{verboutdent} which typeset their content across the full page,
+including most of the wide margin.
+
+\begin{fullwidth}
+x x x x x x x x x x x x x x x x x x x x x
+x x x x x x x x x x x x x x x x x x x x x
+x x x x x x x x x x x x x x x x x x x x x
+x x x x x x x x x x x x x x x x x x x x x
+\end{fullwidth}
+
+\begin{verboutdent}
+{}\/$xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+\end{verboutdent}
+The implementation of \texttt{fullwidth} is rather simplistic and
+may easily break, in which case more sophisticated hackery will be
+needed.
+
+\section{Fonts}
+
+At production time, Computer Modern will be replaced with Bitstream
+Charter, scaled to 95\%, and Latin Modern. For math, the eulervm
+package will be used. You can safely ignore warnings about size
+substitutions.
+
+\section{Assembling your submission}
+
+Please check whether all non-standard stylefiles and packages and all
+non-standard fonts are included. We do have a current \TeX{} Live but,
+although we do have access to CTAN, finding the right package by
+name can occasionally be a challenge.
+
+Avoid jpeg compression for screenshots. Conversion to pdf may
+sometimes result in jpeg compression as well. Use \emph{e.g.} png
+format instead.
+
+Finally, a pdf of your article is appreciated. This way, we can
+check more reliably whether your article compiles
+correctly on our own systems.
+
+\section{References}
+
+If you have references, use whatever suits you. A few sample references:
+see \cite{knuth}, \cite{mapsclass} or \cite{lamport}.
+
+\theendnotes
+
+%\bibliographystyle{apalike}
+%\bibliography{maps}
+
+\begin{thebibliography}{}
+
+\bibitem[Knuth, 1986]{knuth}
+Knuth, D.~E. (1986).
+\newblock {\em The {\TeX{}}book}.
+\newblock Addison-Wesley Publishing Company.
+
+\bibitem[Kroonenberg, 2004]{mapsclass}
+Kroonenberg, S. (2004).
+\newblock The maps style.
+\newblock {\em Maps}, 30.
+
+\bibitem[Lamport, 1994]{lamport}
+Lamport, L. (1994).
+\newblock {\em {\LaTeX} a Document Preparation System}.
+\newblock Addison-Wesley Publishing Company, 2nd edition.
+
+\end{thebibliography}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% the bibtex file:
+
+@BOOK{knuth,
+author = "Donald E. Knuth",
+title = "The {\TeX{}}book",
+publisher = "Addison-Wesley Publishing Company",
+year = 1986,
+}
+
+@BOOK{lamport,
+author = "Leslie Lamport",
+title = "{\LaTeX} a Document Preparation System",
+publisher = "Addison-Wesley Publishing Company",
+edition = "2nd",
+year = 1994,
+}
+
+@ARTICLE{mapsclass,
+author = "Siep Kroonenberg",
+title = "The Maps style",
+journal = "Maps",
+volume = "30",
+year = "2004"
+}
