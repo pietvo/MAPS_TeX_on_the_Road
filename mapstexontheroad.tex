@@ -18,7 +18,7 @@
 
 \title{\LaTeX{} on the Road}
 
-\subtitle{An adventure with \LaTeX{} while traveling light}
+\subtitle{An adventure with \LaTeX{} while travelling light}
 
 \author[Piet van Oostrum]{Piet van Oostrum\\
   \texttt{piet@vanoostrum.org}\\
@@ -35,13 +35,13 @@
   encounter similar situations.
 \end{abstract}
 
-\begin{keywords}\LaTeX, traveling, iPad, Overleaf, git, distributed
+\begin{keywords}\LaTeX, travelling, iPad, Overleaf, git, distributed
   version management, Github
 \end{keywords}
 
 \section{The context}
 
-In July 2018, my wife Cary and I were traveling in South America, to
+In July 2018, my wife Cary and I were travelling in South America, to
 visit friends in Brazil and Bolivia, and additionally to have some
 vacation. We wanted to travel light, so I had decided not to take my
 MacBook with me, saving a little bit more than 2 kgs.\ of weight. We
@@ -60,7 +60,7 @@ for which I had a Python system
 (Pythonista)\footnote{\url{http://omz-software.com/pythonista/}} on my
 iPad.
 
-While we were traveling in Brazil, on our way to Bolivia, I got an email
+While we were travelling in Brazil, on our way to Bolivia, I got an email
 from a user of the \texttt{multirow} package about a possible bug. It
 came with a solution which was a very simple substitution, and back home
 on the laptop, it would have been a few minutes to make the change,
@@ -130,7 +130,7 @@ for the `normal' user to write articles and reports.
 
 They are also not particularly cheap. At this moment Texpad costs \euro
 21.99 and TeX Writer \euro 16.99. If I remember correctly they were a
-little bit cheaper at the time I was traveling. In itself that is not a
+little bit cheaper at the time I was travelling. In itself that is not a
 very steep price, but I did not expect to use it very often, and just
 for this single case I thought it was too much. And they don't have a
 tryout version to see if it really fits you, so if you buy one of these,
@@ -224,19 +224,19 @@ figure~\ref{fig:overleaf-vert}. But then the keyboard is rather small. For a
 setup like this to be workable, it would be better to use an external
 keyboard. There are several keyboards on the market that can be used. They
 are generally connected through Bluetooth. They are light-weight and don't
-take much space, so ideal for traveling light. See
+take much space, so ideal for travelling light. See
 figure~\ref{fig:ipad+keyboard}. I did not have one at that moment, however.
 
 \section{Setting up the project}
 
 Setting up the project is easy. You can create a new project in the Overleaf
-in the Web interface. You can upload each file individually, or a zipfile
-with everything included. Overleaf will unpack the zipfile in your project.
+in the Web interface. You can upload each file individually, or a zip-file
+with everything included. Overleaf will unpack the zip-file in your project.
 
 Immediately, it became apparent that there was a problem with my project.
 Overleaf wants you to designate one of your files as the main \TeX{} file,
 which for me would have been \texttt{multirow.dtx}, but it doesn't accept
-this. It wants to have a \texttt{.tex} file. It does not recognize the
+this. It wants to have a \texttt{.tex} file. It does not recognise the
 \texttt{.dtx} file as a valid \LaTeX{} file. Neither does it want to edit
 the \texttt{.dtx} file, but as the editor was unusable, this was of a minor
 concern. I would have to edit the files locally on my iPad anyway.
@@ -294,7 +294,7 @@ changed.
 If, at a certain moment, you have a state of your project that you want to
 keep, you \emph{commit}, which means a copy is made to the
 \emph{repository}, together with a description that you enter. The
-opposite operation (i.e. making a copy from your repository to your working
+opposite operation (i.e.\ making a copy from your repository to your working
 directory) is called \emph{checkout}. You usually have a separate repository
 for each project. The repository can be on your local computer, or on a
 server. In the latter case it is possible that different people working on
@@ -312,9 +312,9 @@ well-known system is \emph{subversion}
 (SVN\footnote{\url{http://subversion.apache.org}}). It usually has the
 repositories at a central server, but you can also have the repository on
 your local computer, if you are working alone. As SVN has only one
-repository per project it is called a centralized version management system.
+repository per project it is called a centralised version management system.
 
-Centralized version management systems have some big disadvantages for
+Centralised version management systems have some big disadvantages for
 cooperation in teams:
 \begin{itemize}
 \item If you work together the repository must be on a central server, which
@@ -326,13 +326,13 @@ cooperation in teams:
   detailed.
 \end{itemize}
 One solution would be to have both a central repository for the team, and
-your local repository for your own work, but then synchronizing these
+your local repository for your own work, but then synchronising these
 repositories could become tedious. However, this is where \emph{distributed
   version management systems} have their strength.
 
 In a \emph{distributed version management system} you can have both a local
 repository on your computer and a central repository on a server. Or even
-more than one of each. And these can be easily synchronized. The usual way
+more than one of each. And these can be easily synchronised. The usual way
 to work in a team is to have a central repository for the team, and a local
 repository on each team member's computer. Each team member keeps a history
 in the local repository. This can be done often, and also offline. When the
@@ -345,12 +345,12 @@ this is not consistent with some changes that they made themselves. The two
 sets of changed must then be \emph{merged}. This is the simple explanation.
 Much more complicated workflows are also possible.
 
-Both centralized and distributed version management systems support the
+Both centralised and distributed version management systems support the
 concept of \texttt{branches}. A \texttt{branch} is a separate line of
 development in your project. For example you have a project that you release
 from time to time. The development of this release version would for example
 take place on the main branch in your repository. Now after a release you
-want to start working on some very new experimental features for a fxuture
+want to start working on some very new experimental features for a future
 release. If you would just continue your development, then when a bug in
 your project is detected, your project is in an unstable state. So you
 cannot just apply a bug-fix to the current state of your project, but you
@@ -387,7 +387,7 @@ account.
 Git can be used in two ways on Overleaf.
 \begin{itemize}
 \item Your Overleaf project can function as a Git repository
-\item You Overleaf project can be synchronized with a Github repository
+\item You Overleaf project can be synchronised with a Github repository
 \end{itemize}
 
 I decided to take the Github route, mainly because I have experience with
@@ -413,14 +413,21 @@ My workflow can be found in figure~\ref{fig:git}. My editing took place in
 the lower right corner, on the working copy (managed by Git2Go). I could
 have used the editor that Git2Go provides, but it is not very sophisticated.
 It does not have syntax highlighting for \LaTeX{} files, and it gives no
-editing support beyond the standard iPad keyboard. I also had e much better
+editing support beyond the standard iPad keyboard. I also had a much better
 text editing program called
 Textastic\footnote{\url{https://www.textasticapp.com}}. It has syntax
-highlighting for \LaTeX{}, good search facilities and an extended keyboard
+highlighting for \LaTeX{}, good search facilities and an extended keyboard (see fig.~\ref{fig:textastic-kbd})
 that makes it easier to enter non-alphanumeric symbols. Also it has a
-special provision for easy cursor movement. Git2Go, and the other Git apps mentioned above, function as a kind of file system, which means that Textastic can directly edit their files without copying between the two apps. So the only extra operation to edit in Textastic rtather than in Git2Go itself, is switching between the apps. This extra effort I deemed worthwhile for the added comfort of using a good text editor.
+special provision for easy cursor movement. Git2Go, and the other Git apps mentioned above, function as a kind of file system, which means that Textastic can directly edit their files without copying between the two apps. So the only extra operation to edit in Textastic rather than in Git2Go itself, is switching between the apps. This extra effort I deemed worthwhile for the added comfort of using a good text editor.
 
-After editing the file(s), I switch to Git2Go, commit the change, and immediately push it to the Github repository. Then I switch to Overleaf in the browser, fetch the changes from Github to Overleaf in the Overleaf synchronization menu, and process the files, hopefully producing a new PDF file. Many times it did not yet work correctly, so I had to go back to Textastic and start a new cycle. The problem wasn't so much in the \LaTeX{} code, as the changes there were very simple. The main problem was getting the \texttt{latexmkrc} file correct. The difficulty was that Overleaf did not have good documentation about the context in which the Latexmk program was running. Also, running it on their server did not give as much feedback as running on your own computer. Several times I had to write extra information to a text file, and then download that to the iPad to see what happened. For example, I had to make directory listings, and write them to a text file, just to see what files where generated and what their names were. And the process was a bit tedious because I had to synchronize the files as described above before each try. But after some 50 tries, everything worked perfectly. I will spare you all the attemts that I made, but in the next section I will give you the resulting \texttt{latexmkrc} file, and explain what it does.
+\begin{figure*}
+  \centering
+  \includegraphics[height=0.75\textwidth]{Textastic-ext-kbd}
+  \caption{Textastic extended keyboard}
+  \label{fig:textastic-kbd}
+\end{figure*}
+
+After editing the file(s), I switch to Git2Go, commit the change, and immediately push it to the Github repository. Then I switch to Overleaf in the browser, fetch the changes from Github to Overleaf in the Overleaf synchronisation menu, and process the files, hopefully producing a new PDF file. Many times it did not yet work correctly, so I had to go back to Textastic and start a new cycle. The problem wasn't so much in the \LaTeX{} code, as the changes there were very simple. The main problem was getting the \texttt{latexmkrc} file correct. The difficulty was that Overleaf did not have good documentation about the context in which the Latexmk program was running. Also, running it on their server did not give as much feedback as running on your own computer. Several times I had to write extra information to a text file, and then download that to the iPad to see what happened. For example, I had to make directory listings, and write them to a text file, just to see what files where generated and what their names were. And the process was a bit tedious because I had to synchronise the files as described above before each try. But after some 50 tries, everything worked perfectly. I will spare you all the attempts that I made, but in the next section I will give you the resulting \texttt{latexmkrc} file, and explain what it does.
 
 \section{Latexmk}
 \label{sec:latexmk}
@@ -543,7 +550,7 @@ Finally, we also give an example of the \texttt{latexmkrc} file with debugging s
 You see the values of \texttt{\$\$Psource} and \texttt{\$base}, the arguments to the \texttt{pdflatex} call, and the directory listing at the end of the process. Please note that
 in the directory listing there is a file \texttt{multirow.log}; this is the result of the call \texttt{tex~multirow.ins}. Note also the generated \texttt{.sty} files. 
 The files resulting from the \texttt{pdflatex} call on \texttt{multirow.tex/dtx} are all called \texttt{output.*}.
-So \texttt{makeindex} must also act on these files. In figure~\ref{fig:latexmkrc}, line~5, this is accomplished because the file name is given as argument to the function makeglo2gls. In line~8 it is accomplished because the patterns \texttt{\%S} and \texttt{\%D} are replaced by the \emph{source} and \texttt{destination} of the command, respectively. I.e. \texttt{output.idx} and \texttt{output.ind}.
+So \texttt{makeindex} must also act on these files. In figure~\ref{fig:latexmkrc}, line~5, this is accomplished because the file name is given as argument to the function \texttt{makeglo2gls}. In line~8 it is accomplished because the patterns \texttt{\%S} and \texttt{\%D} are replaced by the \emph{source} and \texttt{destination} of the command, respectively. I.e. \texttt{output.idx} and \texttt{output.ind}.
 
 \begin{figure*}
 \textbf{Latexmkrc with debugging:}
@@ -619,9 +626,10 @@ total 1176
 
 \section{Conclusion}
 
-
+Although working at home on my MacBook is much more comfortable, it is possible to do some serious \LaTeX{} work on your iPad while you are travelling. It takes some effort to find the proper way to do it, however. And I hope this article helps you to get started if you need this work flow.
 
 \appendix
+
 \section{Appendix -- iOS Git apps compared}
 \label{sec:appendix}
 
@@ -652,9 +660,9 @@ Working Copy can clone from existing repositories, including through SSH and HTT
 
 If your iPad is connected to a Mac or PC with iTunes, you can drag and drop a repository on your computer through iTunes, and it will be copied to the iPad.
 
-Working Copy's editor has syntax highlighting for  more than 50 different languages. It can show nice graphical representations of your branches and you commit history. Besides the \texttt{merge} functionality it also has the \texttt{rebase} functionality, which is an alternative for merge. For cooperating in large projects this functionality is sometimes necessary.
+Working Copy's editor has syntax highlighting for  more than 50 different languages. It can show nice graphical representations of your branches and you commit history (see fig.~\ref{fig:WC-history}). Besides the \texttt{merge} functionality it also has the \texttt{rebase} functionality, which is an alternative for merge. For cooperating in large projects this functionality is sometimes necessary.
 
-There is more than fits in this limited space, but Working Copy is far out the best of the three apps. It is expensive, but when you do a lot of work with Git on your iPad, it is worth the price. Working Copy operates in a small market, so the price is understandable. If you reaaly want to do serious work with Git on your iPad, it is recommendable to buy this app.
+There is more than fits in this limited space, but Working Copy is far out the best of the three apps. It is expensive, but when you do a lot of work with Git on your iPad, it is worth the price. Working Copy operates in a small market, so the price is understandable. If you really want to do serious work with Git on your iPad, it is recommendable to buy this app.
 
 \item[TIG] is the third app I tried. It takes more or less a middle ground between Git2Go and Working Copy. Like Working Copy it can connect to all kinds of repositories, including Overleaf, and it has \emph{push} functionality. And it is free. It can clone existing repositories, and create local ones. It can also connect repositories to more than one remote repository.
 
@@ -663,6 +671,21 @@ Its editor has syntax highlighting support for 166 languages.
 However, although the functionality is great for a free app, I found its user interface sometimes confusing. And to fetch/push to your remote repositories you have to enter your username and password every time. I did not find a way in which it could remember these. This is very annoying.
 And it crashed quite often.
 \end{descript}
+
+As I have mentioned above, all these apps have the facility that you can open their files in an external editor. Figure~\ref{fig:open-from-Git2Go} shows how to open files from Git2Go in Textastic. This is done inside Textastic with the ``Open\ldots'' button, then selecting ``Git2Go''. It is the possible to chose ``Open'' down in the pop-up, which will open the whole directory in Textastic, or selecting one filename, which will open that file.
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=0.75\textwidth]{WC-history}
+  \caption{Graphical commit history in Working Copy}
+  \label{fig:WC-history}
+\end{figure*}
+\begin{figure*}
+  \centering
+  \includegraphics[width=0.75\textwidth]{Textastic-open-from-Git2Go}
+  \caption{Opening a Git2Go file or repository in Textastic}
+  \label{fig:open-from-Git2Go}
+\end{figure*}
 
 Summary:
 \begin{itemize}
