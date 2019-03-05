@@ -5,6 +5,7 @@
 \usepackage{url}
 \usepackage{graphicx}
 \usepackage{eurosym} % for the euro symbol
+\usepackage{fancyvrb}
 
 \renewcommand{\notesname}{Footnotes}
 
@@ -15,9 +16,9 @@
 
 \begin{document}
 
-\title{\TeX{} on the Road}
+\title{\LaTeX{} on the Road}
 
-\subtitle{An adventure with \TeX{} while traveling light}
+\subtitle{An adventure with \LaTeX{} while traveling light}
 
 \author[Piet van Oostrum]{Piet van Oostrum\\
   \texttt{piet@vanoostrum.org}\\
@@ -34,7 +35,7 @@
   encounter similar situations.
 \end{abstract}
 
-\begin{keywords}\TeX, traveling, iPad, Overleaf, git, distributed
+\begin{keywords}\LaTeX, traveling, iPad, Overleaf, git, distributed
   version management, Github
 \end{keywords}
 
@@ -178,23 +179,30 @@ after the \verb|\item| (see figure~\ref{fig:enumerate}).
 
 \begin{figure*}
   \centering
-  \includegraphics[width=0.9\textwidth]{overleaf}
+  \includegraphics[width=0.75\textwidth]{overleaf}
   \caption{An early version of this article in Overleaf, with some of
     the maps.cls documentation still in place}\label{fig:overleaf}
 \end{figure*}
 
 \begin{figure*}
   \centering
-  \includegraphics[width=0.9\textwidth]{overleaf-hor}
+  \includegraphics[width=0.75\textwidth]{overleaf-hor}
   \caption{Overleaf screen with virtual keyboard on an iPad}\label{fig:overleaf-hor}
 \end{figure*}
 
 \begin{figure*}
   \centering
-  \includegraphics[height=0.9\textwidth]{overleaf-vert}
+  \includegraphics[height=0.75\textwidth]{overleaf-vert}
   \caption{Overleaf screen with virtual keyboard on an iPad in portrait
     mode}
   \label{fig:overleaf-vert}
+\end{figure*}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=0.75\textwidth]{iPad+keyboard}
+  \caption{iPad mini with external keyboard}
+  \label{fig:ipad+keyboard}
 \end{figure*}
 
 Despite the problems that the editor gave at that time, it seemed to me that
@@ -245,12 +253,12 @@ to find out why. My \texttt{multirow.dtx} contains a line
 \begin{verbatim}
 \DocInput{\jobname.dtx}
 \end{verbatim}
-which is quite usual. After some searching I found out that \verb|\jobname|
-wasn't \texttt{multirow} as was to be expected, but \texttt{output}. It
-appears that Overleaf runs the job in a kind of \emph{sandbox} with the name
-of the main file \texttt{output}.
+which is quite usual in \texttt{.dtx} files. After some searching I found
+out that \verb|\jobname| wasn't \texttt{multirow} as was to be expected, but
+\texttt{output}. It appears that Overleaf runs the job in a kind of
+\emph{sandbox} where the jobname of the main file is \texttt{output}. You can see that in figure~\ref{fig:latexmkrc-debug}.
 
-After some googling I found that Overleaf uses \texttt{latexmkrc} to process
+After some googling I found that Overleaf uses \texttt{Latexmk}\footnote{\url{}https://mg.readthedocs.io/latexmk.html} to process
 the job. It provides a standard, but invisible, \texttt{latexmkrc} file that
 controls the compilation process. However, you can also supply your
 \texttt{latexmkrc} file. This file is described in
@@ -259,7 +267,7 @@ section~\ref{sec:latexmk}.
 So the challenge was now to upload a correct \texttt{latexmkrc} file, and to
 update the \texttt{multirow.dtx} file. This could be done by uploading these
 files after each modification, but this might be an error-prone process, and
-you don't have a record of what has been done. Enter version management.
+you don't have a record of what has been done. Enter \emph{version management}.
 
 \section{Distributed version management}
 
@@ -284,14 +292,14 @@ information about who made the changes, and a description of what has
 changed.
 
 If, at a certain moment, you have a state of your project that you want to
-keep, you \texttt{commit}, which means a copy is made to the
-\texttt{repository}, together with a description that you enter. The
+keep, you \emph{commit}, which means a copy is made to the
+\emph{repository}, together with a description that you enter. The
 opposite operation (i.e. making a copy from your repository to your working
 directory) is called \emph{checkout}. You usually have a separate repository
 for each project. The repository can be on your local computer, or on a
 server. In the latter case it is possible that different people working on
 the same project use the same repository. They would then each have their
-own \texttt{working copy}. As they are working independently, these could be
+own \emph{working copy}. As they are working independently, these could be
 different. A version management system usually has provisions to resolve
 conflicting working copies.
 
@@ -394,8 +402,6 @@ that I found: Working Copy\footnote{\url{https://workingcopyapp.com}} and
 TIG.\footnote{\url{https://itunes.apple.com/us/app/tig-git-client/id1161732225}}
 In the appendix I give a comparison of these apps.
 
-
-
 \begin{figure}
   \centering
   \includegraphics[width=0.9\columnwidth]{Git}
@@ -403,131 +409,279 @@ In the appendix I give a comparison of these apps.
   \label{fig:git}
 \end{figure}
 
+My workflow can be found in figure~\ref{fig:git}. My editing took place in
+the lower right corner, on the working copy (managed by Git2Go). I could
+have used the editor that Git2Go provides, but it is not very sophisticated.
+It does not have syntax highlighting for \LaTeX{} files, and it gives no
+editing support beyond the standard iPad keyboard. I also had e much better
+text editing program called
+Textastic\footnote{\url{https://www.textasticapp.com}}. It has syntax
+highlighting for \LaTeX{}, good search facilities and an extended keyboard
+that makes it easier to enter non-alphanumeric symbols. Also it has a
+special provision for easy cursor movement. Git2Go, and the other Git apps mentioned above, function as a kind of file system, which means that Textastic can directly edit their files without copying between the two apps. So the only extra operation to edit in Textastic rtather than in Git2Go itself, is switching between the apps. This extra effort I deemed worthwhile for the added comfort of using a good text editor.
+
+After editing the file(s), I switch to Git2Go, commit the change, and immediately push it to the Github repository. Then I switch to Overleaf in the browser, fetch the changes from Github to Overleaf in the Overleaf synchronization menu, and process the files, hopefully producing a new PDF file. Many times it did not yet work correctly, so I had to go back to Textastic and start a new cycle. The problem wasn't so much in the \LaTeX{} code, as the changes there were very simple. The main problem was getting the \texttt{latexmkrc} file correct. The difficulty was that Overleaf did not have good documentation about the context in which the Latexmk program was running. Also, running it on their server did not give as much feedback as running on your own computer. Several times I had to write extra information to a text file, and then download that to the iPad to see what happened. For example, I had to make directory listings, and write them to a text file, just to see what files where generated and what their names were. And the process was a bit tedious because I had to synchronize the files as described above before each try. But after some 50 tries, everything worked perfectly. I will spare you all the attemts that I made, but in the next section I will give you the resulting \texttt{latexmkrc} file, and explain what it does.
+
+\section{Latexmk}
+\label{sec:latexmk}
 
 \begin{figure*}
-  \centering
-  \includegraphics[width=0.9\textwidth]{iPad+keyboard}
-  \caption{iPad mini with external keyboard}
-  \label{fig:ipad+keyboard}
+\textbf{Latexmkrc file:}
+\begin{Verbatim}[numbers=left,xleftmargin=7mm]
+$ENV{'TZ'} = 'America/La Paz';
+
+add_cus_dep('glo', 'gls', 0, 'makeglo2gls');
+sub makeglo2gls {
+    system("makeindex -s gglo.ist -o \"$_[0].gls\" \"$_[0].glo\"");
+}
+
+$makeindex = 'makeindex -s gind.ist -o %D %S';
+
+push @generated_exts, 'glo', 'gls', 'glg', 'sty', 'txt';
+
+$pdflatex = 'internal mylatex';
+sub mylatex { 
+    my @args = @_;
+    (my $base = $$Psource) =~ s/\.[^.]+$//;
+    system("tex $base.ins");
+    # backslashes are interpreted by (1) perl string (2) shell (3) sed regexp
+    # therefore we need 8 backslashes to match a single one
+    system("sed -e s/\\\\\\\\jobname/$base/g $base.dtx > $base.tex");
+    return system("pdflatex @args");
+}
+\end{Verbatim}
+  \caption{The final latexmkrc file. The line numbers are not part of the file.}\label{fig:latexmkrc}
 \end{figure*}
 
+Latexmk is a program (a Perl script) to process a \LaTeX{} file with all the necessary \texttt{bibtex}, \texttt{makeindex} and similar calls. It will run \LaTeX{} and these other programs as many times as is necessary to get a completely processed and stable output.
+For the run-of-the-mill \LaTeX{} file, Latexmk has enough knowledge to know what to do. However, when there are additional requirements, like a non-standard index, glossaries etc.\ you must give Latexmk a recipe of how to process the various stages. The recipe is given in the \texttt{latexmkrc} file, which in fact is also a Perl script. Latexmk has an enormous amount of possibilities, and its manual\footnote{\url{http://mirrors.ctan.org/support/latexmk/latexmk.pdf}} contains 48 pages. So it took some time to get everything right.
 
-% LocalWords:  mies
+Overleaf provides a standard \texttt{latexmkrc} file for its jobs, but as we have seen above, this is not adequate for processing the \texttt{.ins} and \texttt{.dtx} files. To make Overleaf happy, we must provide a main \texttt{.tex} file, but with our \texttt{latexmkrc} file we don't use it, so its content is unimportant.
+
+In figure~\ref{fig:latexmkrc} the resulting \texttt{latexmkrc} for this process is given, annotated with line numbers. In the remainder of this section I explain what it does.
+\begin{descript}
+  \item[line 1.] This sets the timezone to your local time. This is so
+  that messages with date and time will get your local time, and not the
+  time of Overleaf's servers, which would be useless in most cases. As I
+  was in Bolivia at the time, the timezone was 'America/La Paz'. Now at
+  home it would be 'Europe/Amsterdam'.
+
+  \item[line 3-6.] In a \texttt{.dtx} file the file extension
+  \texttt{.glo}, which is normally used for glossaries, is used for the
+  list of changes. And the sorted version, to be created by
+  \texttt{makeindex}, will be \texttt{.gls}. These lines give a recipe
+  how to create the \texttt{.gls} file from the \texttt{.glo} file using
+  \texttt{makeindex}.
+
+  \item[line 8.] For processing the normal index in a \texttt{.dtx}
+  file \texttt{makeindex }needs the additional argument
+  \texttt{-s~gind.ist}.
+
+  \item[line 10.] This defines which extra file extensions we need in
+  the process. Besides the already mentioned \texttt{.glo} and
+  \texttt{.gls}, there is also \texttt{.glg} which is the log output of
+  the \texttt{makeindex} command from line 5. And the \texttt{.txt}
+  extension is used for debugging.
+
+  \item[line 12.] Here comes the trick to let Overleaf do our work.
+  Normally it will run \texttt{pdflatex} on the main \TeX{} file, which
+  in our case is \texttt{multirow.tex}. But you can define the
+  \texttt{\$pdflatex} variable to let it use another command. In our
+  case we let it run the internal function \texttt{mylatex} that
+  follows. In this function we do all the preparatory work before we run
+  the actual \texttt{pdflatex}.
+
+  \item[line 14.] Pick up the arguments from the call to
+  \texttt{mylatex} in the variable \texttt{@args}. This is standard Perl
+  prose.
+
+  \item[line 15.] Latexmk puts the name of the main \TeX{} file in
+  \texttt{\$\$Psource} (see page~45 in the Latexmk manual). This line is
+  actually a shorthand for two statements:
+\begin{verbatim}
+my $base = $$Psource;
+$base =~ s/\.[^.]+$//;
+\end{verbatim}
+  The first line copies \texttt{\$\$Psource} to a local variable
+  \texttt{\$base}. The second line strips of the part after (and
+  including) the last dot. So \texttt{multirow.tex} will be transformed
+  to just \texttt{multirow}. The reason I use \texttt{\$\$Psource}
+  rather than just using \texttt{multirow} is that now the
+  \texttt{latexmkrc} file is also usable for other \texttt{.dtx} files.
+
+  \item[line 16.] First we run \texttt{tex} on our \texttt{.ins}
+  file, which would be \texttt{multirow.ins} in our case. This generates
+  the required \texttt{.sty} files. This is to ensure that we use the
+  new versions of our \texttt{.sty} files, rather than an outdated
+  version in Overleaf's \TeX{} system.
+
+\item[line 19.] From our \texttt{.dtx} file we generate a copy to our
+  \texttt{.tex} file where the text \verb|\jobname| is replaced by the
+  actual base name of our file (in our case \texttt{multirow}). This is
+  necessary, as Overleaf supplies a \verb|\jobname| of \texttt{output}.
+  So in this case we generate \texttt{multirow.tex} from
+  \texttt{multirow.dtx}. But this file will input \texttt{multirow.dtx} during its processing.
+
+  We do the replacement by calling the Unix program \texttt{sed}. The
+  \verb|\jobname| is inside a regular expression in \texttt{sed},
+  therefore the backslash must be doubled. But then, this command is
+  processed by the Unix shell, which also interprets backslashes.
+  Therefore we must double all the backslashes again. And then this
+  command is inside a Perl string where backslashes are also
+  interpreted. So we must double them again, and we end up with 8
+  backslashes to represent a single one.
+
+\item[line 20.] Finally we run the real \texttt{pdflatex} command with
+  the original arguments. Note that we process the new
+  \texttt{multirow.tex} file, because that is what Overleaf expects to
+  do. Also, because this is run in a \texttt{sandbox} (i.e. on a copy of
+  the original files in a separate directory), this does not affect our
+  original file.
+\end{descript}
+
+Finally, we also give an example of the \texttt{latexmkrc} file with debugging statements included in figure~\ref{fig:latexmkrc-debug} and the corresponding output in figure~\ref{fig:debug-output}.
+You see the values of \texttt{\$\$Psource} and \texttt{\$base}, the arguments to the \texttt{pdflatex} call, and the directory listing at the end of the process. Please note that
+in the directory listing there is a file \texttt{multirow.log}; this is the result of the call \texttt{tex~multirow.ins}. Note also the generated \texttt{.sty} files. 
+The files resulting from the \texttt{pdflatex} call on \texttt{multirow.tex/dtx} are all called \texttt{output.*}.
+So \texttt{makeindex} must also act on these files. In figure~\ref{fig:latexmkrc}, line~5, this is accomplished because the file name is given as argument to the function makeglo2gls. In line~8 it is accomplished because the patterns \texttt{\%S} and \texttt{\%D} are replaced by the \emph{source} and \texttt{destination} of the command, respectively. I.e. \texttt{output.idx} and \texttt{output.ind}.
+
+\begin{figure*}
+\textbf{Latexmkrc with debugging:}
+\begin{verbatim}
+$ENV{'TZ'} = 'America/La Paz';
+
+add_cus_dep('glo', 'gls', 0, 'makeglo2gls');
+sub makeglo2gls {
+    system("makeindex -s gglo.ist -o \"$_[0].gls\" \"$_[0].glo\"");
+}
+
+$makeindex = 'makeindex -s gind.ist -o %D %S';
+
+push @generated_exts, 'glo', 'gls', 'glg', 'sty', 'txt';
+
+$pdflatex = 'internal mylatex';
+sub mylatex { 
+    my @args = @_;
+    Run_subst("echo \"%%B=%B %%R=%R %%S=%S %%T=%T\" > debugout.txt"); ## DEBUG ##
+    system("echo '\@args' = \"@args\"              >> debugout.txt"); ## DEBUG ##
+    system("echo '\$\$Psource' = \"$$Psource\"     >> debugout.txt"); ## DEBUG ##
+    (my $base = $$Psource) =~ s/\.[^.]+$//;
+    system("echo '\$base' = \"$base\"              >> debugout.txt"); ## DEBUG ##
+    system("tex $base.ins");
+    # backslashes are interpreted by (1) perl string (2) shell (3) sed regexp
+    # therefore we need 8 backslashes to match a single one
+    system("sed -e s/\\\\\\\\jobname/$base/g $base.dtx > $base.tex");
+    $status = system("pdflatex @args");
+    system("ls -l                                  >> debugout.txt"); ## DEBUG ##
+    return $status;
+}
+\end{verbatim}
+  \caption{\texttt{latexmkrc} file with debug statements}
+  \label{fig:latexmkrc-debug}
+\end{figure*}
+
+\begin{figure*}
+\textbf{Debug Output:}
+\begin{verbatim}
+%B=output %R=output %S=multirow.tex %T=multirow.tex
+@args = -synctex=1 -interaction=batchmode -recorder -output-directory=/compile --jobname=output multirow.tex
+$$Psource = multirow.tex
+$base = multirow
+total 1176
+-rw-r--r-- 1 tex tex   3871 Mar  4 14:12 README
+-rw-r--r-- 1 tex tex     49 Mar  4 14:12 README.md
+-rw-r--r-- 1 tex tex   1417 Mar  4 14:12 bigdelim.sty
+-rw-r--r-- 1 tex tex   1234 Mar  4 14:12 bigstrut.sty
+-rw-r--r-- 1 tex tex    203 Mar  4 14:12 debugout.txt
+-rw-r--r-- 1 tex tex   1054 Mar  4 14:12 latexmkrc
+-rw-r--r-- 1 tex tex  80398 Mar  4 14:12 multirow.dtx
+-rw-r--r-- 1 tex tex   2182 Mar  4 14:12 multirow.ins
+-rw-r--r-- 1 tex tex   3719 Mar  4 14:12 multirow.log
+-rw-r--r-- 1 tex tex   5022 Mar  4 14:12 multirow.sty
+-rw-r--r-- 1 tex tex  80398 Mar  4 14:12 multirow.tex
+-rw-r--r-- 1 tex tex   3487 Mar  4 14:12 output.aux
+-rw-r--r-- 1 tex tex      0 Mar  4 14:12 output.chktex
+-rw-r--r-- 1 tex tex  25207 Mar  4 13:10 output.fdb_latexmk
+-rw-r--r-- 1 tex tex  20593 Mar  4 14:12 output.fls
+-rw-r--r-- 1 tex tex   3281 Mar  4 14:12 output.glo
+-rw-r--r-- 1 tex tex   3578 Mar  4 08:13 output.gls
+-rw-r--r-- 1 tex tex   3270 Mar  4 14:12 output.idx
+-rw-r--r-- 1 tex tex    891 Mar  4 08:13 output.ilg
+-rw-r--r-- 1 tex tex   2655 Mar  4 08:13 output.ind
+-rw-r--r-- 1 tex tex  34086 Mar  4 14:12 output.log
+-rw-r--r-- 1 tex tex 610336 Mar  4 14:12 output.pdf
+-rw-r--r-- 1 tex tex 262970 Mar  4 14:12 output.synctex.gz
+-rw-r--r-- 1 tex tex   1467 Mar  4 14:12 output.toc
+\end{verbatim}
+  \caption{\texttt{latexmkrc} debug output}
+  \label{fig:debug-output}
+\end{figure*}
+
+\section{Conclusion}
+
+
+
 \appendix
-
 \section{Appendix -- iOS Git apps compared}
 \label{sec:appendix}
 
-
-
-
-\newpage \null \newpage
-
-\section{Lists}
-
-Another frequently-displayed structure is a list.
-The following is an example of an \emph{itemized}
-list.
-\begin{itemize}
-  \item This is the first item of an itemized list.
-    Each item in the list is marked with a ``tick''.
-  \item This is the second item of the list.  It
-    contains another list nested inside it.  The inner
-    list is an \emph{enumerated} list.
-    \begin{enumerate}
-      \item This is the first item of an enumerated
-        list that is nested within the itemized list.
-
-      \item This is the second item of the inner list.
-        \LaTeX\ allows you to nest lists deeper than
-          you really should.
-    \end{enumerate}
-    This is the rest of the second item of the outer
-    list.  It is no more interesting than any other
-    part of the item.
-  \item This is the third item of the list.
-\end{itemize}
-In a two-column layout, protracted indenting doesn't look very
-good. Therefore, the Maps classfile provides \texttt{itemouter}- and
-\texttt{enumouter} environments:
-\begin{itemouter}
-\item This is the first item of a non-indented itemized list,
-  produced with the \texttt{itemouter} environment.
-\item This is the second item.
-\end{itemouter}
-Now an enumerated version:
-\begin{enumouter}
-\item This is the first item of a non-indented enumerated list,
-  produced with the \texttt{enumouter} environment.
-\item This is the second item.
-\end{enumouter}
-And a version for descriptions:
+In this section I compare the three Git apps on iOS that I tried. I did all the production work in Git2Go, but after it was finished I also tried Working Copy and TIG.
+  
 \begin{descript}
-\item[cow] A milk-producing animal that grazes grass and has
-multiple stomachs
-\item[kangoroo] An Australian hopping animal
+\item[Git2Go] has a limitation that it only cannot work with Git repositories
+  on all servers. It works with a limited number of services, namely
+  Github, Bitbucket\footnote{\url{https://bitbucket.org}} and
+  Gitlab\footnote{\url{https://gitlab.com}}. Other remote repositories
+  can be used if they offer access by the SSH protocol. SSH is one of
+  the two main protocols used to connect to Git servers. The other is
+  HTTPS. Overleaf only offers HTTPS, which Git2Go does not support.
+
+  To create a repository on your iPad you must \emph{clone} (i.e. copy) an existing repository on one of the supported servers. You cannot create a local-only repository on the iPad. Once you have the repository on your iPad, you can edit the files in the repository, commit the changes, create new branches. It can fetch from  and push to the remote repository, but these are not separate operations. It always does a fetch (which may be empty), followed by a push. It can also merge different branches. It is a limited set of operations compared to the full Git functionality, but it is sufficient for a normal workflow as described above. Also cooperating with other people would be possible, if it doesn't require the more esoteric Git functionality. Git2Go's editor has syntax highlighting for a limited number of programming languages.
+
+Git2Go is free, as long as you only access \emph{public} repositories (i.e. repositories that everybody can see). To access private repositories you would have to buy an upgrade.
+
+For the push operation you will have to login, and Git2Go will remember your username and password, until you explicitly logout.
+
+And occasionally it crashes.
+
+\textbf{Last minute Note:} I tried to re-install Git2Go on my iPhone, and got the message that it was no longer available on the App Store. Also a search in the App Store did not come up with Git2Go. I have no idea if this is a permanent situation, or that it might be in a process of updating.
+
+\item[Working Copy] is the nicest of the three apps. It has a very elaborate set of functions. It can connect to all kinds of servers, including Overleaf. However, to use the \texttt{push} functionality you have to pay. The price is quite steep (\euro 17.99 at the time of writing), but you can get a free 10 day trial. I used this for writing this article to see how it worked.
+
+Working Copy can clone from existing repositories, including through SSH and HTTPS, and also create local repositories. It can also create a local repository from a \texttt{.zip} file. Once you have a repository it can  connect your repository to more than one remote repository, which sometimes can be quite handy. For example in the current example, the repository on the iPad could have been connected both to the Overleaf repository and to the Github repository. Of course you will have to be careful not to mess up your workflow. 
+
+If your iPad is connected to a Mac or PC with iTunes, you can drag and drop a repository on your computer through iTunes, and it will be copied to the iPad.
+
+Working Copy's editor has syntax highlighting for  more than 50 different languages. It can show nice graphical representations of your branches and you commit history. Besides the \texttt{merge} functionality it also has the \texttt{rebase} functionality, which is an alternative for merge. For cooperating in large projects this functionality is sometimes necessary.
+
+There is more than fits in this limited space, but Working Copy is far out the best of the three apps. It is expensive, but when you do a lot of work with Git on your iPad, it is worth the price. Working Copy operates in a small market, so the price is understandable. If you reaaly want to do serious work with Git on your iPad, it is recommendable to buy this app.
+
+\item[TIG] is the third app I tried. It takes more or less a middle ground between Git2Go and Working Copy. Like Working Copy it can connect to all kinds of repositories, including Overleaf, and it has \emph{push} functionality. And it is free. It can clone existing repositories, and create local ones. It can also connect repositories to more than one remote repository.
+
+Its editor has syntax highlighting support for 166 languages.
+
+However, although the functionality is great for a free app, I found its user interface sometimes confusing. And to fetch/push to your remote repositories you have to enter your username and password every time. I did not find a way in which it could remember these. This is very annoying.
+And it crashed quite often.
 \end{descript}
 
-\section{Tabulars}
-
-The Maps classfile adds some vertical space around horizontal rules in
-tables. This makes vertical rules look funny, but most of the time you
-are better off without vertical rules anyway; see table~\ref{tabulars}.
-If you really insist on vertical rules, use the \texttt{deftables}
-document option.
-
-\begin{table}[ht]
-
-\begin{tabular}{|l|l|}
-\hline
-var & value\\
-\hline
-$Q_{s,\max}$ & 0.18\\
-$K_{s}$      & 1.0\\
-$Y_{x/s}$    & 0.5\\
-$Y_{p/s}$    & 0.854\\
-$Q_{p,\max}$ & 0.0045\\
-$\mu_{\rm crit}$  & 0.01\\
-$k_{h}$       & 0.002\\
-$m_{s}$       & 0.025\\
-\hline
-\end{tabular}\hspace{2pc}
-\begin{tabular}{@{}ll@{}}
-\hline
-var & value\\
-\hline
-$Q_{s,\max}$   & 0.18\\
-$K_{s}$        & 1.0\\
-$Y_{x/s}$      & 0.5\\
-$Y_{p/s}$      & 0.854\\
-$Q_{p,\max}$   & 0.0045\\
-$\mu_{\rm crit}$ & 0.01\\
-$k_{h}$        & 0.002\\
-$m_{s}$        & 0.025\\
-\hline
-\end{tabular}
-\caption{Tabulars with and without vertical rules}\label{tabulars}
-\end{table}
-
-\section{Wide typesetting in single-column layout}
-
-For both single-column layouts, there are environments \texttt{fullwidth} and
-\texttt{verboutdent} which typeset their content across the full page,
-including most of the wide margin.
-
-\begin{fullwidth}
-x x x x x x x x x x x x x x x x x x x x x
-x x x x x x x x x x x x x x x x x x x x x
-x x x x x x x x x x x x x x x x x x x x x
-x x x x x x x x x x x x x x x x x x x x x
-\end{fullwidth}
-
-\begin{verboutdent}
-{}xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-\end{verboutdent}
-The implementation of \texttt{fullwidth} is rather simplistic and
-may easily break, in which case more sophisticated hackery will be
-needed.
+Summary:
+\begin{itemize}
+\item If you only need access to repositories hosted by Github,
+  Bitbucket or Gitlab, or repositories that can be accessed by the SSH
+  protocol, and your requirements are modest, you can choose Git2Go (if
+  still available).
+\item If you need access to repositories that do not fall in the
+  previous categories (such as Overleaf), and you can live with a not so
+  optimal user interface, and your requirements are modest, you can
+  choose TIG. It may be a good choice when you
+  want to connect to a repository that Git2Go does not support, and when
+  you find Working Copy too expensive.
+\item If you want the top Git app on your iPad (or iPhone) and are
+  willing to pay the price, I would recommend Working Copy. If you want
+  to do serious work with Git, this is the choice and it would be worth
+  the price.
+\end{itemize}
+There are nowadays some other Git apps available, but it seems that they are roughly comparable to one of the above. 
 
 \theendnotes
 
