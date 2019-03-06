@@ -1,4 +1,4 @@
-\documentclass[nosubsub]{maps}
+\documentclass[realfonts,nosubsub]{../maps}
 
 %\documentclass[onecolumn]{maps} % for symmetric single-column layout
 
@@ -9,35 +9,38 @@
 
 \renewcommand{\notesname}{Footnotes}
 
-% title- and author commands can be placed before or after
-% \begin{document}.
+\usepackage{inconsolata}
 
-\setcounter{page}{2}
-
-\begin{document}
-
-\title{\LaTeX{} on the Road}
-
-\subtitle{An adventure with \LaTeX{} while travelling light}
-
-\author[Piet van Oostrum]{Piet van Oostrum\\
-  \texttt{piet@vanoostrum.org}\\
-  \url{http://piet.vanoostrum.org}}
-
-\maketitle
-
-\begin{abstract}
-  This article describes the adventures that I had while working on a
+\setupArticle {
+  Page = 58,
+  Number = 49,
+  Year = 2019,
+  Period = voorjaar,
+  Language = dutch,
+  Author = {~\\Piet van Oostrum},
+  RunningAuthor = Piet van Oostrum,
+  Title = \LaTeX{} on the Road,
+  Address = {\texttt{piet@vanoostrum.org}\\
+  \url{http://piet.vanoostrum.org}},
+  SubTitle = {An adventure with \LaTeX{} while travelling light},
+  Abstract = {This article describes the adventures that I had while working on a
   small \TeX{} project without my beloved laptop at hand. With only an
   iPad to do the work and without a local \TeX{} system installed on it,
   there were several challenges. I document them here so that others can
   enjoy the struggles I had and can benefit from the solutions when they
-  encounter similar situations.
-\end{abstract}
+  encounter similar situations.},
+  Keywords = {\LaTeX, travelling, iPad, Overleaf, git, distributed
+  version management, Github}
+}
 
-\begin{keywords}\LaTeX, travelling, iPad, Overleaf, git, distributed
-  version management, Github
-\end{keywords}
+% title- and author commands can be placed before or after
+% \begin{document}.
+
+
+
+\begin{document}
+
+\maketitle
 
 \section{The context}
 
@@ -109,6 +112,8 @@ There were in practice two options to solve the problem:
 \item Install a \LaTeX{} system on my iPad.
 \item Use an online (cloud-based) \LaTeX{} system.
 \end{itemize}
+
+\newpage
 
 \subsection{\LaTeX{} apps on the iPad}
 
@@ -186,7 +191,7 @@ after the \verb|\item| (see figure~\ref{fig:enumerate}).
 
 \begin{figure*}
   \centering
-  \includegraphics[width=0.75\textwidth]{overleaf-hor}
+  \includegraphics[width=0.78\textwidth]{overleaf-hor}
   \caption{Overleaf screen with virtual keyboard on an iPad}\label{fig:overleaf-hor}
 \end{figure*}
 
@@ -429,6 +434,8 @@ special provision for easy cursor movement. Git2Go, and the other Git apps menti
 
 After editing the file(s), I switch to Git2Go, commit the change, and immediately push it to the Github repository. Then I switch to Overleaf in the browser, fetch the changes from Github to Overleaf in the Overleaf synchronisation menu, and process the files, hopefully producing a new PDF file. Many times it did not yet work correctly, so I had to go back to Textastic and start a new cycle. The problem wasn't so much in the \LaTeX{} code, as the changes there were very simple. The main problem was getting the \texttt{latexmkrc} file correct. The difficulty was that Overleaf did not have good documentation about the context in which the Latexmk program was running. Also, running it on their server did not give as much feedback as running on your own computer. Several times I had to write extra information to a text file, and then download that to the iPad to see what happened. For example, I had to make directory listings, and write them to a text file, just to see what files where generated and what their names were. And the process was a bit tedious because I had to synchronise the files as described above before each try. But after some 50 tries, everything worked perfectly. I will spare you all the attempts that I made, but in the next section I will give you the resulting \texttt{latexmkrc} file, and explain what it does.
 
+\kern -1pt
+
 \section{Latexmk}
 \label{sec:latexmk}
 
@@ -502,6 +509,8 @@ In figure~\ref{fig:latexmkrc} the resulting \texttt{latexmkrc} for this process 
   \texttt{mylatex} in the variable \texttt{@args}. This is standard Perl
   prose.
 
+\newpage
+
   \item[line 15.] Latexmk puts the name of the main \TeX{} file in
   \texttt{\$\$Psource} (see page~45 in the Latexmk manual). This line is
   actually a shorthand for two statements:
@@ -561,7 +570,6 @@ add_cus_dep('glo', 'gls', 0, 'makeglo2gls');
 sub makeglo2gls {
     system("makeindex -s gglo.ist -o \"$_[0].gls\" \"$_[0].glo\"");
 }
-
 $makeindex = 'makeindex -s gind.ist -o %D %S';
 
 push @generated_exts, 'glo', 'gls', 'glg', 'sty', 'txt';
@@ -630,6 +638,8 @@ Although working at home on my MacBook is much more comfortable, it is possible 
 
 \appendix
 
+\vspace*{6pt}
+
 \section{Appendix -- iOS Git apps compared}
 \label{sec:appendix}
 
@@ -668,12 +678,6 @@ There is more than fits in this limited space, but Working Copy is far out the b
 
 Its editor has syntax highlighting support for 166 languages.
 
-However, although the functionality is great for a free app, I found its user interface sometimes confusing. And to fetch/push to your remote repositories you have to enter your username and password every time. I did not find a way in which it could remember these. This is very annoying.
-And it crashed quite often.
-\end{descript}
-
-As I have mentioned above, all these apps have the facility that you can open their files in an external editor. Figure~\ref{fig:open-from-Git2Go} shows how to open files from Git2Go in Textastic. This is done inside Textastic with the ``Open\ldots'' button, then selecting ``Git2Go''. It is the possible to choose ``Open'' down in the pop-up, which will open the whole directory in Textastic, or to select one filename, which will open that file.
-
 \begin{figure*}
   \centering
   \includegraphics[width=0.75\textwidth]{WC-history}
@@ -687,6 +691,13 @@ As I have mentioned above, all these apps have the facility that you can open th
   \label{fig:open-from-Git2Go}
 \end{figure*}
 
+However, although the functionality is great for a free app, I found its user interface sometimes confusing. And to fetch/push to your remote repositories you have to enter your username and password every time. I did not find a way in which it could remember these. This is very annoying.
+And it crashed quite often.
+\end{descript}
+
+As I have mentioned above, all these apps have the facility that you can open their files in an external editor. Figure~\ref{fig:open-from-Git2Go} shows how to open files from Git2Go in Textastic. This is done inside Textastic with the ``Open\ldots'' button, then selecting ``Git2Go''. It is the possible to chose ``Open'' down in the pop-up, which will open the whole directory in Textastic, or selecting one filename, which will open that file.
+
+
 Summary:
 \begin{itemize}
 \item If you only need access to repositories hosted by Github,
@@ -699,13 +710,16 @@ Summary:
   choose TIG. It may be a good choice when you
   want to connect to a repository that Git2Go does not support, and when
   you find Working Copy too expensive.
+  
+  \newpage
+  
 \item If you want the top Git app on your iPad (or iPhone) and are
   willing to pay the price, I would recommend Working Copy. If you want
   to do serious work with Git, this is the choice and it would be worth
   the price.
 \end{itemize}
-There are nowadays some other Git apps available, but it seems that they are roughly comparable to one of the above. Some of them only support just Github, Bitbucket or Gitlab. I have not found any free app that comes with the functionality of Git2Go or TIG. And paid apps may be slightly cheaper than Working Copy, but they also have less functionality.
+There are nowadays some other Git apps available, but it seems that they are roughly comparable to one of the above. 
 
-\theendnotes
+~
 
 \end{document}
