@@ -17,7 +17,7 @@
   Year = 2019,
   Period = voorjaar,
   Language = dutch,
-  Author = {~\\Piet van Oostrum},
+  Author = {Piet van Oostrum},
   RunningAuthor = Piet van Oostrum,
   Title = \LaTeX{} on the Road,
   Address = {\texttt{piet@vanoostrum.org}\\
@@ -169,7 +169,7 @@ functionality. For example, if you type \verb|\begin{enumerate}| the editor
 after the \verb|\item| (see figure~\ref{fig:enumerate}).
 \begin{figure}[hb]
   \centering
-  \includegraphics[width=0.9\columnwidth]{enumerate}
+  \noindent\hbox to 0.9\columnwidth{\includegraphics[width=0.45\columnwidth]{enumerate}\hss}\\~
   \caption{Editor supplies useful parts}
   \label{fig:enumerate}
 \end{figure}
@@ -295,6 +295,8 @@ containing the history of your project. It will contain the state of your
 \emph{working copy} at certain moments in the past, together with
 information about who made the changes, and a description of what has
 changed.
+
+\newpage
 
 If, at a certain moment, you have a state of your project that you want to
 keep, you \emph{commit}, which means a copy is made to the
@@ -719,6 +721,5 @@ Summary:
   the price.
 \end{itemize}
 There are nowadays some other Git apps available, but it seems that they are roughly comparable to one of the above. Some of them only support just Github, Bitbucket or Gitlab. I have not found any free app that comes with the functionality of Git2Go or TIG. And paid apps may be slightly cheaper than Working Copy, but they also have less functionality.
-~
-
+ 
 \end{document}
